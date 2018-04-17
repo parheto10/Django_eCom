@@ -18,7 +18,8 @@ class SearchProduitView(ListView):
         query = request.GET.get('q', None)
         print (query)
         if query is not None:
-            return Produit.objects.filter(titre__icontains=query)
+            if query is not None:
+                return Produit.objects.search(query)
         return Produit.objects.featured()
     '''
     __icontains = Tous attribut contenant la valeur entree

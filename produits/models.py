@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import random
 import os
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.urls import reverse
 
@@ -29,6 +30,15 @@ class ProduitQueryset(models.query.QuerySet):
     def active(self):
         return self.filter(active = True)
 
+    def search(self, query):
+        lookups = (
+                Q(titre__icontains=query) |
+                Q(description__icontains=query) |
+                Q(prix__icontains=query) |
+                Q(tag__titre__icontains=query)
+        )
+        return self.filter(lookups).distinct()
+
 class ProduitManager(models.Manager):
     def get_queryset(self):
         return ProduitQueryset(self.model, using=self._db)
@@ -45,6 +55,9 @@ class ProduitManager(models.Manager):
             return qs.first()
         return None
 
+    def search(self, query):
+        return self.get_queryset().active().search(query)
+
 class Produit(models.Model):
     titre           = models.CharField(max_length=255)
     slug            = models.SlugField(blank=True, unique=True)
@@ -53,6 +66,7 @@ class Produit(models.Model):
     image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
+    timestamp       = models.DateTimeField(auto_now_add=True)
 
     objects = ProduitManager()
 

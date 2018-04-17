@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from paniers.views import panier_home
 from .views import home, about, contact, login_page, insription
 from django.views.generic import TemplateView
 
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'^insription/$', insription, name='insription'),
     url(r'^about/$', about, name='about'),
     url(r'^contact/$', contact, name='contact'),
+    url(r'^panier/$', panier_home, name='panier'),
     url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html'), name='bootstrap'),
 
     #url relative au produits

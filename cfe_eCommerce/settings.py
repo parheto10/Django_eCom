@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Application de notre Projet
+    'paniers.apps.PaniersConfig',
     'produits.apps.ProduitsConfig',
     'search.apps.SearchConfig',
+    'tags.apps.TagsConfig',
+
 ]
 
 MIDDLEWARE = [
