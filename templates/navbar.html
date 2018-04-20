@@ -2,6 +2,7 @@
 {% url 'contact' as contact_url %}
 {% url 'about' as about_url %}
 {% url 'produits:produits' as produits_url %}
+{% url 'panier:panier' as panier_url %}
 
 
 
@@ -28,6 +29,9 @@
       </li>
       <li class="nav-item {% if request.path == produits_url %}active{% endif %}">
         <a class="nav-link" href="{{ produits_url }}">Produits</a>
+      </li>
+     <li class="nav-item {% if request.path == panier_url %}active{% endif %}">
+         <a class="nav-link" href="{{ panier_url }}">{{ request.session.panier_items }} <i class="fas fa-shopping-cart"></i></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

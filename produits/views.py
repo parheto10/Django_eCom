@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
 
+from paniers.models import Panier
 from .models import Produit
 
 class ProduitFeaturedListView(ListView):
@@ -46,6 +47,12 @@ def produits(request):
 class ProduitDetailSlugView(DetailView):
     queryset = Produit.objects.all()
     template_name = "produits/detail.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProduitDetailSlugView, self).get_context_data(*args, **kwargs)
+        panier_obj, new_obj = Panier.objects.new_or_get(self.request)
+        context['panier'] = panier_obj
+        return context
 
     def get_object(self, *args, **kwargs):
         request = self.request

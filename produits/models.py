@@ -76,6 +76,10 @@ class Produit(models.Model):
     def __str__(self): #python3
         return self.titre
 
+    @property
+    def nom(self):
+        return self.titre
+
     def get_absolute_url(self):
         #return "/produits/{slug}/".format(slug=self.slug)
         return reverse("produits:detail", kwargs={"slug":self.slug})

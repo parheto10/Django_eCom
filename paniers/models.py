@@ -46,16 +46,24 @@ class Panier(models.Model):
         return str(self.id)
 
 
-def pre_save_panier_receiver(sender, action, instance, *args, **kwargs):
+def m2m_changed_panier_receiver(sender, action, instance, *args, **kwargs):
     #print(action)
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         produits = instance.produits.all()
         total = 0
         for x in produits:
             total += x.prix
-        instance.subtotal = total
-        instance.save()
+        if instance.subtotal != total:
+            instance.subtotal = total
+            instance.save()
 
-m2m_changed.connect(pre_save_panier_receiver, sender=Panier.produits.through)
+m2m_changed.connect(m2m_changed_panier_receiver, sender=Panier.produits.through)
+
+def pre_save_panier_receiver(sender, instance, *args, **kwargs):
+    if instance.subtotal > 0 :
+        instance.total = instance.subtotal #* 0.18
+    else:
+        instance.total = 0.00
+pre_save.connect(pre_save_panier_receiver, sender=Panier)
 
 # Create your models here.

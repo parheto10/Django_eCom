@@ -1,0 +1,29 @@
+/* === Custome CSS ===*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.custom-nav {
+    background: linear-gradient(left, #f93d67, #1047d7);
+    background: -webkit-linear-gradient(left, #f93d67, #1047d7);
+    background: -moz-linear-gradient(left, #f93d67, #1047d7);
+    background: -ms-linear-gradient(left, #f93d67, #1047d7);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -ms-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.custom-nav ul li a {
+    color: #fff!important;
+}
+
+.navbar-brand {
+    color: #fff!important;
+}
+
+.content {
+    margin-top: 50px;
+}

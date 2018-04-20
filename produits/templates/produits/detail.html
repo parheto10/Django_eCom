@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="row">
-    <div class="col">
+    <div class="col-12 col-md-6">
         <h1>{{ object.titre }}</h1> <br/>
         <h3>Prix : <b><em>{{ object.prix }}</em></b><br/></h3>
         <h4><em>Description :</em><br/></h4>
@@ -9,6 +9,9 @@
         {% if object.image %}
             <img src="{{ object.image.url }}" class="img-fluid" alt="{{ object.titre }}">
         {% endif %}
+    </div>
+    <div class="col-12 col-md-6">
+        {% include 'produits/snippets/ajouter_au_panier.html' with produit=object panier=panier %}
     </div>
 </div>
 {% endblock %}

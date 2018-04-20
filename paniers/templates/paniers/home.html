@@ -2,4 +2,40 @@
 
 {% block content %}
     <h1>Mon Panier</h1>
+    <br />
+    {% if panier.produits.exists %}
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Artice</th>
+              <th scope="col">Prix</th>
+{#              <th scope="col">Handle</th>#}
+            </tr>
+          </thead>
+          <tbody>
+          {% for produit in panier.produits.all %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>
+                 <a class="btn btn-link" href="{{ produit.get_absolute_url }}">{{ produit.nom }}</a>
+                {% include 'produits/snippets/ajouter_au_panier.html' with produit=produit panier=panier in_panier=True %}
+              </td>
+              <td>{{ produit.prix }}</td>
+            </tr>
+          {% endfor %}
+            <tr>
+              <td colspan="2"></td>
+              <td><b>Total : </b>{{ panier.subtotal }}</td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td><b>Total TTC : </b>{{ panier.subtotal }}</td>
+            </tr>
+          </tbody>
+        </table>
+    {% else %}
+        <p class="lead">Panier Vide</p>
+    {% endif %}
 {% endblock %}
