@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.db.models.signals import pre_save
+from cfe_eCommerce.utils import unique_slug_generator
 from produits.models import Produit
-from produits.utils import unique_slug_generator
+
 
 
 class Tag(models.Model):

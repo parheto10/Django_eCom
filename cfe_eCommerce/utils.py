@@ -5,6 +5,17 @@ from django.utils.text import slugify
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+def unique_cmde_id_generator(instance):
+
+    cmde_new_id = random_string_generator()
+
+    Klass = instance.__class__
+    qs_exists = Klass.objects.filter(cmde_id=cmde_new_id).exists()
+    if qs_exists:
+        return unique_slug_generator(instance)
+    return cmde_new_id
+
+
 def unique_slug_generator(instance, new_slug=None):
     if new_slug is not None:
         slug = new_slug
@@ -13,7 +24,7 @@ def unique_slug_generator(instance, new_slug=None):
 
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(slug=slug).exists()
-    if qs_exists: 
+    if qs_exists:
         new_slug = "{slug}-{randstr}".format(
                     slug = slug,
                     randstr = random_string_generator(size=4)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Mon Panier</h1>
+    <h1>Mon Panier - <a class="btn btn-default btn-sm ml-right" href="{% url 'produits:produits' %}">Ajouter Article</a></h1>
     <br />
     {% if panier.produits.exists %}
 
@@ -36,6 +36,6 @@
           </tbody>
         </table>
     {% else %}
-        <p class="lead">Panier Vide</p>
+        <p class="lead">Panier Vide - <a class="btn btn-default" href="{% url 'produits:produits' %}">Ajouter Produit</a></p>
     {% endif %}
 {% endblock %}

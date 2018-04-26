@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save, m2m_changed
 
+
 from produits.models import Produit
 
 User = settings.AUTH_USER_MODEL
@@ -36,7 +37,7 @@ class PanierManager(models.Manager):
 class Panier(models.Model):
     user         = models.ForeignKey(User, null=True, blank=True)
     produits     = models.ManyToManyField(Produit, blank=True)
-    subtotal = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    subtotal     = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total        = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     ajouter_le   = models.DateTimeField(auto_now_add=True)
 

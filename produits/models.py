@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.db.models.signals import pre_save
 from django.urls import reverse
 
-from .utils import unique_slug_generator
+from cfe_eCommerce.utils import unique_slug_generator
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)

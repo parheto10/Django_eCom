@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Application de notre Projet
+    'commandes.apps.CommandesConfig',
     'paniers.apps.PaniersConfig',
     'produits.apps.ProduitsConfig',
     'search.apps.SearchConfig',
