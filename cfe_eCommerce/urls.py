@@ -19,22 +19,22 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from paniers.views import panier_home
-from .views import home, about, contact, login_page, insription
+from .views import home, about, contact
 from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^$', home, name='home'),
-    url(r'^login/$', login_page, name='login'),
-    url(r'^insription/$', insription, name='insription'),
     url(r'^about/$', about, name='about'),
     url(r'^contact/$', contact, name='contact'),
     #url(r'^panier/$', panier_home, name='panier'),
+    url(r'^comptes/', include('comptes.urls', namespace="comptes", app_name="comptes")),
     url(r'^panier/', include('paniers.urls', namespace="panier", app_name="panier")),
     url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html'), name='bootstrap'),
 
     #url relative au produits
     url(r'^produits/', include('produits.urls', namespace="produits", app_name="produits")),
     url(r'^search/', include('search.urls', namespace="search", app_name="search")),
+    #url('', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
 ]#
 if settings.DEBUG:

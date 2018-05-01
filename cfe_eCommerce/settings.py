@@ -31,19 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    #other Apps
+    'bootstrap4',
+
     #Application de notre Projet
+    'billing.apps.BillingConfig',
     'commandes.apps.CommandesConfig',
+    'comptes.apps.ComptesConfig',
     'paniers.apps.PaniersConfig',
     'produits.apps.ProduitsConfig',
     'search.apps.SearchConfig',
     'tags.apps.TagsConfig',
+
+    'django.contrib.admin',
 
 ]
 
@@ -135,3 +142,7 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'assets', "static_root"))
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'static', 'medias'))
+
+
+#from django.core.urlresolvers import reverse_lazy
+LOGOUT_REDIRECT_URL = 'comptes:login'

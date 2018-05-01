@@ -1,4 +1,7 @@
 {% url 'home' as home_url %}
+{% url 'comptes:login' as login_url %}
+{% url 'comptes:logout' as logout_url %}
+{% url 'comptes:inscription' as register_url %}
 {% url 'contact' as contact_url %}
 {% url 'about' as about_url %}
 {% url 'produits:produits' as produits_url %}
@@ -43,11 +46,11 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% if user.is_authenticated %}
-              <a class="dropdown-item" href="#">Déconnexion</a>
+              <a class="dropdown-item {% if request.path == logout_url %}active{% endif %}" href="{{ logout_url }}">Déconnexion</a>
           {% else %}
-              <a class="dropdown-item" href="{% url 'login' %}">Connexion</a>
+              <a class="dropdown-item {% if request.path == login_url %}active{% endif %}" href="{{ login_url }}">Connexion</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'insription' %}">Inscription</a>
+              <a class="dropdown-item {% if request.path == register_url %}active{% endif %}" href="{{ register_url }}">Inscription</a>
           {% endif %}
         </div>
       </li>

@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Vérification</h1>
-    <p>Total Commande : <em>{{ object.panier.total }}</em></p>
-    <p>Livraison : <em>{{ object.livraison }}</em></p>
-    <p><b>Total Commande :</b> <em>{{ object.total_cmde }}</em></p>
+    {% if not billing_profile %}
+        <div class="row text-center">
+            <div class="col-12 col-md-6">
+                {% include 'comptes/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+            </div>
+            <div class="col-12 col-md-6">
+                <p class="lead">
+                    Continuer La visite en tant que Visiteur
+                </p>
+                {% url 'comptes:invite' as invite_url %}
+                {% include 'comptes/snippets/form.html' with form=invite_form next_url=request.build_absolute_uri action_url=invite_url %}
+            </div>
+        </div>
+
+    {% else %}
+        <h1>Vérification</h1>
+        <p>Total Commande : <em>{{ object.panier.total }}</em></p>
+        <p>Livraison : <em>{{ object.livraison }}</em></p>
+        <p><b>Total Commande :</b> <em>{{ object.total_cmde }}</em></p>
+    {% endif %}
 {% endblock %}

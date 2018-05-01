@@ -1,0 +1,17 @@
+{% load bootstrap4 %}
+
+<form action="{% if action_url %} {{ action_url }} {% else %}
+    {% url 'comptes:login' %}
+{% endif %}" method="post">
+    <p class="muted">
+        Utiliser le Formulaire ci-dessous pour vous Connecter
+    </p>
+    {% csrf_token %}
+    {% if next_url %}
+        <input type="hidden" name="next" value="{{ next_url }}" />
+    {% endif %}
+        {% bootstrap_form form %}
+    <button type="submit" class="btn btn-block btn-primary">Valider</button>
+    <hr/>
+    <p>J'ai pas de Compte, <a href="{% url 'comptes:inscription' %}">Inscription</a></p>
+</form>
