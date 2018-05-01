@@ -20,7 +20,7 @@ def panier_home(request):
     # panier_obj.total = total
     # panier_obj.save()
     context = {
-        "panier" : panier_obj,
+        "panier": panier_obj,
     }
     return render(request, 'paniers/home.html', context)
 
@@ -31,7 +31,7 @@ def maj_panier(request):
         try:
             produit_obj = Produit.objects.get(id=produit_id)
         except Produit.DoesNotExist:
-            print('Afficher le Message Suivant, Article terminer!!')
+            print('Afficher le Message Suivant, Article en rupture desole!!')
             return redirect('panier:panier')
         panier_obj, new_obj = Panier.objects.new_or_get(request)
         if produit_obj in panier_obj.produits.all():

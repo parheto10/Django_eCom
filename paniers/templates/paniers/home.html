@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Mon Panier - <a class="btn btn-default btn-sm ml-right" href="{% url 'produits:produits' %}">Ajouter Article</a></h1>
+    <h1>Mon Panier -
+        <a class="btn btn-default btn-sm ml-right" href="{% url 'produits:produits' %}">
+            Ajouter Article
+        </a>
+    </h1>
     <br />
     {% if panier.produits.exists %}
 
@@ -9,7 +13,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Artice</th>
+              <th scope="col">Désignation</th>
               <th scope="col">Prix</th>
 {#              <th scope="col">Handle</th>#}
             </tr>
@@ -19,7 +23,9 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>
-                 <a class="btn btn-link" href="{{ produit.get_absolute_url }}">{{ produit.nom }}</a>
+                 <a class="btn btn-link" href="{{ produit.get_absolute_url }}">
+                     {{ produit.nom }}
+                 </a>
                 {% include 'produits/snippets/ajouter_au_panier.html' with produit=produit panier=panier in_panier=True %}
               </td>
               <td>{{ produit.prix }}</td>
@@ -31,11 +37,15 @@
             </tr>
             <tr>
               <td colspan="2"></td>
-              <td><b>Total TTC : </b>{{ panier.subtotal }}</td>
+              <td><b>Total TTC : </b>{{ panier.total }}</td>
             </tr>
           </tbody>
         </table>
     {% else %}
-        <p class="lead">Panier Vide - <a class="btn btn-default" href="{% url 'produits:produits' %}">Ajouter Produit</a></p>
+        <p class="lead">Panier Vide -
+            <a class="btn btn-default" href="{% url 'produits:produits' %}">
+                Ajouter Produit
+            </a>
+        </p>
     {% endif %}
 {% endblock %}

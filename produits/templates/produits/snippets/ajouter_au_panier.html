@@ -3,13 +3,19 @@
     <input type="hidden" name="produit_id" value="{{ produit.id }}">
 
     {% if in_panier %}
-        <button type="submit" class="btn btn-danger btn-sm" style="padding:0px; cursor:pointer">Supprimer du Panier</button>
+        <button type="submit" class="btn btn-danger btn-sm" style="padding:0px; cursor:pointer">
+            Supprimer du Panier ?
+        </button>
     {% else %}
         {% if produit in panier.produits.all %}
             de ton Panier
-            <button type="submit" class="btn btn-danger">Supprimer du Panier</button>
+            <button type="submit" class="btn btn-danger">
+                Supprimer du Panier ?
+            </button>
         {% else %}
-            <button type="submit" class="btn btn-success">Ajouter Produit au Panier</button>
+            <button type="submit" class="btn btn-success">
+                Ajouter Produit au Panier
+            </button>
         {% endif %}
     {% endif %}
 </form>
