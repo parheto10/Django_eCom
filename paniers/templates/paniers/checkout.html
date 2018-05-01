@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Vérification</h1>
+    <p>Total Commande : <em>{{ object.panier.total }}</em></p>
+    <p>Livraison : <em>{{ object.livraison }}</em></p>
+    <p><b>Total Commande :</b> <em>{{ object.total_cmde }}</em></p>
+{% endblock %}

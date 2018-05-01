@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import math
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from cfe_eCommerce.utils import unique_cmde_id_generator
@@ -17,6 +18,7 @@ class Commande(models.Model):
     cmde_id   = models.CharField(max_length=150, blank=True)
     panier      = models.ForeignKey(Panier)
     status      = models.CharField(max_length=250, default='nouvelle', choices=CMDE_STATUS_CHOIX)
+    livraison = models.DecimalField(default=1000.00, max_digits=100, decimal_places=2)
     total_cmde  = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
 
     def __unicode__(self):
@@ -24,8 +26,10 @@ class Commande(models.Model):
 
     def maj_total(self):
         total_panier = self.panier.total
-        new_total_cmde = total_panier
-        self.total_cmde = new_total_cmde
+        total_livraison = self.livraison
+        new_total_cmde = math.fsum([total_panier, total_livraison])
+        formatted_total = format(new_total_cmde, '.2f')
+        self.total_cmde = formatted_total
         self.save()
         return new_total_cmde
 

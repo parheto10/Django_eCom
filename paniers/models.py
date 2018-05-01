@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save, m2m_changed
@@ -62,7 +63,7 @@ m2m_changed.connect(m2m_changed_panier_receiver, sender=Panier.produits.through)
 
 def pre_save_panier_receiver(sender, instance, *args, **kwargs):
     if instance.subtotal > 0 :
-        instance.total = instance.subtotal #* 0.18
+        instance.total = Decimal(instance.subtotal) #* 0.18
     else:
         instance.total = 0.00
 pre_save.connect(pre_save_panier_receiver, sender=Panier)

@@ -39,6 +39,11 @@
               <td colspan="2"></td>
               <td><b>Total TTC : </b>{{ panier.total }}</td>
             </tr>
+
+            <tr>
+              <td colspan="2"></td>
+              <td><a class="btn btn-group-lg btn-success" href="{% url 'panier:checkout' %}">Vérifier Commande</a></td>
+            </tr>
           </tbody>
         </table>
     {% else %}
@@ -49,3 +54,4 @@
         </p>
     {% endif %}
 {% endblock %}
+
