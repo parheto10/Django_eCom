@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h1>Formulaire de Connexion</h1>
+            <form method="post">
+                <p class="muted">
+                    Utiliser le Formulaire ci-dessous pour vous Connecter
+                </p>
+                {% csrf_token %}
+                    {% bootstrap_form form %}
+                <button type="submit" class="btn btn-block btn-primary">Valider</button>
+                <hr/>
+                <p>J'ai pas de Compte, <a href="{% url 'comptes:inscription' %}">Inscription</a></p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

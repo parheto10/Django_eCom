@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <h1>Formulaire d'Inscription</h1>
+            <form method="post">
+                <p class="muted">
+                    Utiliser le Formulaire ci-dessous pour vous Inscrire!
+                </p>
+                {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-block btn-primary">Inscription</button>
+                <hr/>
+                <p>J'ai déjà un compte, <a href="{% url 'comptes:login' %}">Connexion</a></p>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
