@@ -19,7 +19,7 @@ def invite_vue(request):
     if invite_form.is_valid():
         email = invite_form.cleaned_data.get('email')
         new_invite_email = InviteEmail.objects.create(email=email)
-        request.session['new_invite_email'] = new_invite_email.id
+        request.session['new_invite_id'] = new_invite_email.id
         if is_safe_url(redirect_path, request.get_host()):
             return redirect(redirect_path)
         else:
@@ -42,6 +42,10 @@ def login_page(request):
 
         if user is not None:
             login(request, user)
+            try:
+                del request.session['new_invite_id']
+            except:
+                pass
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:

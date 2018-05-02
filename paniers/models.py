@@ -12,7 +12,6 @@ from produits.models import Produit
 User = settings.AUTH_USER_MODEL
 
 class PanierManager(models.Manager):
-
     def new_or_get(self, request):
         panier_id = request.session.get("panier_id", None)
         qs = self.get_queryset().filter(id=panier_id)

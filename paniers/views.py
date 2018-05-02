@@ -39,32 +39,20 @@ def checkout_home(request):
     cmde_obj = None
     if nv_panier or panier_obj.produits.count() == 0:
         return redirect('panier:panier')
-    else:
-        cmde_obj, new_cmde_obj = Commande.objects.get_or_create(panier=panier_obj)
-    user = request.user
-    billing_profile = None
+
     login_form = LoginForm()
     invite_form = InviteForm()
-    invite_email_id = request.session.get('new_invite_email')
-    if user.is_authenticated:
-        billing_profile, billing_profile.created = BillingProfile.objects.get_or_create(
-                user=user,
-                email=user.email
-            )
-    elif invite_email_id is not None:
-        invite_email_obj = InviteEmail.objects.get(id=invite_email_id)
-        billing_profile, billing_invite_profile_created = BillingProfile.objects.get_or_create(
-            email=invite_email_obj.email
-        )
-    else:
-        pass
+
+    billing_profile, billing_invite_profile_created = BillingProfile.object.new_or_get(request)
+    if billing_profile is not None:
+        cmde_obj, cmde_obj_created = Commande.object.new_or_get(billing_profile, panier_obj)
+
     context = {
         'object': cmde_obj,
         'billing_profile':billing_profile,
         'login_form': login_form,
         'invite_form':invite_form
     }
-
     return render(request, 'paniers/checkout.html', context)
 
 
